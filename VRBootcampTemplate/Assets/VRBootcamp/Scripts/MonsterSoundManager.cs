@@ -6,6 +6,10 @@ public class MonsterSoundManager : MonoBehaviour
 {
     public float timeBetweenSounds;
     public AudioSource audioSource;
+    public AudioSource punch1AudioSource;
+    public AudioSource punch2AudioSource;
+    public AudioSource step1AudioSource;
+    public AudioSource step2AudioSource;
     public List<MonsterSound> monsterSounds = new List<MonsterSound>();
     private List<MonsterSound> tempMonsterSounds = new List<MonsterSound>();
     private bool soundStarted = false;
@@ -20,7 +24,7 @@ public class MonsterSoundManager : MonoBehaviour
 
     public void EndSounds() {
         soundStarted = false;
-        StopCoroutine(LoopSounds());
+        StopAllCoroutines();
     }
 
     private IEnumerator LoopSounds() {
@@ -38,6 +42,22 @@ public class MonsterSoundManager : MonoBehaviour
             audioSource.Play();
             yield return new WaitForSeconds(timeBetweenSounds);
         }
+    }
+
+    public void PlayPunchSound1() {
+        punch1AudioSource.Play();
+    }
+
+    public void PlayPunchSound2() {
+        punch2AudioSource.Play();
+    }
+
+    public void PlayStepSound1() {
+        step1AudioSource.Play();
+    }
+
+    public void PlayStepSound2() {
+        step2AudioSource.Play();
     }
 
     [System.Serializable]
