@@ -6,6 +6,7 @@ public class MonsterIdleState : MonsterState
 {
     public override void OnEnterState() {
         monsterStateMachine.animator.SetBool("isWalking", false);
+        monsterStateMachine.navMeshAgent.isStopped = true;
     }
 
     public override void OnExitState() {

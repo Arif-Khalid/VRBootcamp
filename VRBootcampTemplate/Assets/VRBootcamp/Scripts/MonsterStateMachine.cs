@@ -12,6 +12,7 @@ public class MonsterStateMachine : MonoBehaviour
     public float timeBetweenDestinationUpdate;
     public float rotateSpeed;
     public BoxCollider attackCollider;
+    public MonsterSoundManager monsterSoundManager;
     private MonsterState currentState;
     [HideInInspector] public NavMeshAgent navMeshAgent;
 
@@ -25,6 +26,7 @@ public class MonsterStateMachine : MonoBehaviour
         monsterAttackState.monsterStateMachine = this;
         monsterIdleState.monsterStateMachine = this;
         currentState = monsterIdleState;
+        monsterSoundManager.StartSounds();
     }
     private void Update() {
         currentState.Update();
