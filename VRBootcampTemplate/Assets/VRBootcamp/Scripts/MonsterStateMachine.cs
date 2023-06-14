@@ -10,6 +10,8 @@ public class MonsterStateMachine : MonoBehaviour
     public Animator animator;
     public float timeBetweenAttacks;
     public float timeBetweenDestinationUpdate;
+    public float rotateSpeed;
+    public BoxCollider attackCollider;
     private MonsterState currentState;
     [HideInInspector] public NavMeshAgent navMeshAgent;
 
@@ -22,7 +24,7 @@ public class MonsterStateMachine : MonoBehaviour
         monsterChaseState.monsterStateMachine = this;
         monsterAttackState.monsterStateMachine = this;
         monsterIdleState.monsterStateMachine = this;
-        currentState = monsterChaseState;
+        currentState = monsterIdleState;
     }
     private void Update() {
         currentState.Update();
@@ -32,5 +34,17 @@ public class MonsterStateMachine : MonoBehaviour
         currentState.OnExitState();
         nextState.OnEnterState();
         currentState = nextState;
+    }
+
+    public void startChase() {
+        changeState(monsterChaseState);
+    }
+
+    public void startAttacking() {
+        attackCollider.enabled = true;
+    }
+
+    public void stopAttacking() {
+        attackCollider.enabled = false;
     }
 }
