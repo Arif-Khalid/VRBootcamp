@@ -13,6 +13,6 @@ public class CubeSpawner : MonoBehaviour
 
     void FixedUpdate()
     {
-        objectPooler.SpawnFromPooler("Cube", transform.position, Quaternion.identity);
+        objectPooler.SpawnFromPool("Cube", transform.position, Quaternion.identity);
     }
 }
