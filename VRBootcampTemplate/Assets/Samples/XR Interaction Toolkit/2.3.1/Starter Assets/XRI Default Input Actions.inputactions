@@ -2135,6 +2135,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "RayButton",
+                    "type": "Button",
+                    "id": "a7736470-3bd9-46c8-b590-443fe79af98d",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -2179,6 +2188,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "ResetButton",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "42787fd1-483c-42de-9fb8-018281f16203",
+                    "path": "<XRController>{RightHand}/secondaryButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RayButton",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

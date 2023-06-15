@@ -15,6 +15,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] GameObject rDirect;
     [SerializeField] BreakableObjectsFactory BOF;
     [SerializeField] GameObject machete;
+    [SerializeField] GameObject lRay;
+    [SerializeField] GameObject rRay;
+    [SerializeField] GameObject weap;
     GameObject lWeap;
     GameObject rWeap;
     CharacterController XROriginCC;
@@ -27,7 +30,7 @@ public class PlayerController : MonoBehaviour
 
     public bool isSlashingL = false;
     bool lPickUp = false;
-    [SerializeField] float timeSlashL = 0.5f;
+    [SerializeField] public float timeSlashL = 0.5f;
     bool lCycle = false;
 
     public bool isSlashingR = false;
@@ -36,47 +39,57 @@ public class PlayerController : MonoBehaviour
     bool rCycle = false;
     float score = 0f;
     public InputActionReference resetButton;
-
+    public InputActionReference rayButton;
     public float speed;
     // Start is called before the first frame update
 
 
     public ActionBasedController Lcont;
     public ActionBasedController Rcont;
+    float maxHeightL;
+    float prevHeightL;
+    float heightTimeL;
+    float maxHeightR;
+    float prevHeightR;
+    float heightTimeR;
 
     void Awake(){
         resetButton.action.started += Reset;
+        rayButton.action.started += rayDebug;
+    }
+    void OnDestroy(){
+        resetButton.action.started -= Reset;
+        rayButton.action.started -= rayDebug;
     }
     void Start()
     {
         transform.position = XROrigin.transform.position;
-        
+        Physics.IgnoreCollision(XROrigin.GetComponent<CharacterController>(), weap.GetComponent<BoxCollider>());
         XROriginCC = XROrigin.GetComponent<CharacterController>();
         speed = 1;
+        lRay.SetActive(false);
+        rRay.SetActive(false);
     }
 
     // Update is called once per frame
     void Update()
     {
         float height = head.transform.position.y - lHand.transform.position.y;
-        
         if (height <= 0.3){
             leftArmUp = 3;
         }
         else if (height  <= 0.4 && !lCycle){
             if (leftArmUp == 3){
-                isSlashingL = true;
-                timeSlashL = 0.5f;
-                lCycle = true;
-                if(lPickUp)
-                Debug.Log("start left");
+                //isSlashingL = true;
+                //timeSlashL = 0.5f;
+                //lCycle = true;
+                //if(lPickUp)
             }
             leftArmUp = 2;
            if (!cycle)
 
             {
                 timetoStop = 1f;
-                Debug.Log("larmrarm");
                 cycle = true;
             }
         }
@@ -86,15 +99,13 @@ public class PlayerController : MonoBehaviour
                 cycle = false;
                 timetoStop  = 1f;
                 //GetComponent<Rigidbody>().AddForce(Camera.main.transform.forward.x , 0, Camera.main.transform.forward.z);
-                Debug.Log("hhhh");
 
             }
             else{
                 //isRunning = false;
             }
             leftArmUp = 0;
-            isSlashingL = false;
-            Debug.Log("end");
+            //isSlashingL = false;
         }
         else{
             leftArmUp = 1;
@@ -107,25 +118,24 @@ public class PlayerController : MonoBehaviour
         if (height <= 0.3){
             rightArmUp = 3;
         }
-        if (height <= 0.4){
+        else if (height <= 0.4){
             if (rightArmUp == 3 && !rCycle){
-                if (rPickUp)
-                isSlashingR = true;
-                timeSlashR = 0.5f;
-                rCycle = true;
-                Debug.Log("start right");
+                //if (rPickUp)
+                //isSlashingR = true;
+                //timeSlashR = 0.5f;
+                //rCycle = true;
             }
             rightArmUp = 2;
         }
-        else if ( height >= 0.5 ){
+        else if ( height >= 5 ){
             rightArmUp = 0;
-            isSlashingR = false;
+           // isSlashingR = false;
         }
         else{
             rightArmUp = 1;
         }
         if (rCycle && rightArmUp != 2){
-            rCycle = false;
+           // rCycle = false;
         }
         if (leftArmUp > 2 && rightArmUp > 2 || (leftArmUp  == 0 && rightArmUp == 0)){
             isRunning = false;
@@ -133,7 +143,7 @@ public class PlayerController : MonoBehaviour
         flashlight.transform.position = Camera.main.transform.position + new Vector3(0,0.15f,0);
         flashlight.transform.LookAt(flashlight.transform.position + Camera.main.transform.forward);
         if (isRunning){
-            XROriginCC.Move(Camera.main.transform.forward.normalized * Time.deltaTime * speed);
+            XROriginCC.Move(new Vector3((Camera.main.transform.forward.normalized * Time.deltaTime * speed).x,0,(Camera.main.transform.forward.normalized * Time.deltaTime * speed).z));
             //Controller Type, Vibration amp(0-1), Frequency 50-500HZ, duration in ms
             //PXR_Input.SendHapticImpulse(PXR_Input.VibrateType.LeftController, .5f, 10,100);
             //PXR_Input.SendHapticImpulse(PXR_Input.VibrateType.RightController, .5f, 10,100);
@@ -149,12 +159,14 @@ public class PlayerController : MonoBehaviour
             isSlashingL = false;
         }
         else{
+            PXR_Input.SendHapticImpulse(PXR_Input.VibrateType.LeftController, .5f, 10,100);
             timeSlashL -= Time.deltaTime;
         }
         if (timeSlashR <= 0f){
             isSlashingR = false;
         }
         else{
+            PXR_Input.SendHapticImpulse(PXR_Input.VibrateType.RightController, .5f, 10,100);
             timeSlashR -= Time.deltaTime;
         }
         if (isSlashingL){
@@ -163,19 +175,68 @@ public class PlayerController : MonoBehaviour
         else if (isSlashingR){
             Debug.Log("slashing right");
         }
-        Debug.Log(lWeap);
+        
         if (lWeap != null){
             Lcont.hideControllerModel = true;
             lWeap.transform.position = lHand.transform.position;
+            if (prevHeightL < lHand.transform.position.y){
+                maxHeightL = lHand.transform.position.y;
+                heightTimeL = 0f;
+            }
+            else{
+                if (heightTimeL <= 0f){
+                    heightTimeL = 0.25f;
+                    maxHeightL = lHand.transform.position.y;
+                    isSlashingL = false;
+                    timeSlashL = 0f;
+                }
+                else{
+                    heightTimeL -= Time.deltaTime;
+                }
+            }
+
+            if (heightTimeL > 0f && (maxHeightL - lHand.transform.position.y) / (0.25 - heightTimeL) > 2 && !isSlashingL){
+                isSlashingL = true;
+                timeSlashL = 1.0f;
+            }
+        }
+        if (rWeap != null){
+            Rcont.hideControllerModel = true;
+            rWeap.transform.position = rHand.transform.position;
+            if (prevHeightR < rHand.transform.position.y){
+                maxHeightR = rHand.transform.position.y;
+                heightTimeR = 0f;
+            }
+            else{
+                if (heightTimeR <= 0f){
+                    heightTimeR = 0.25f;
+                    maxHeightR = rHand.transform.position.y;
+                    isSlashingR = false;
+                    timeSlashR = 0f;
+                }
+                else{
+                    heightTimeR -= Time.deltaTime;
+                }
+            }
+
+            if (heightTimeR > 0f && (maxHeightR - rHand.transform.position.y) / (0.25 - heightTimeR) > 2 && !isSlashingR){
+                isSlashingR = true;
+                timeSlashR = 1.0f;
+            }
         }
         if (rWeap != null){
             rWeap.transform.position = rHand.transform.position;
             Rcont.hideControllerModel = true;
         }
         //XROrigin.transform.position = transform.position;
+        prevHeightL = lHand.transform.position.y;
+        prevHeightR = rHand.transform.position.y;
+        if (lWeap != weap && rWeap != weap){
+            weap.transform.position = Camera.main.transform.position - new Vector3(0.1f,0.5f,0);
+            weap.transform.eulerAngles = new Vector3(90f,180f,0);
+        }
     }
     public void PickUpWeap(SelectEnterEventArgs ObjSelector){
-        Debug.Log(ObjSelector.interactorObject.transform.gameObject);
         if (ObjSelector.interactorObject.transform.gameObject == lDirect){
             lPickUp = true;
             lWeap = ObjSelector.interactableObject.transform.gameObject;
@@ -190,7 +251,7 @@ public class PlayerController : MonoBehaviour
     public void LetGoWeap(SelectExitEventArgs ObjSelector){
             if (ObjSelector.interactorObject.transform.gameObject == lDirect){
             lPickUp = false;
-            isSlashingL = false;
+            //isSlashingL = false;
             lWeap = null;
             Lcont.hideControllerModel = false;
         }
@@ -223,6 +284,24 @@ public class PlayerController : MonoBehaviour
         BOF.Reset();
         Debug.Log(score);
         score = 0f;
-        
+    }
+
+    public void rayActive(){
+        lRay.SetActive(true);
+        rRay.SetActive(true);
+    }
+    public void rayInactive(){
+        lRay.SetActive(true);
+        rRay.SetActive(true);
+    }
+    public void rayDebug(InputAction.CallbackContext callbackContext){
+        if (lRay.activeSelf){
+            lRay.SetActive(false);
+            rRay.SetActive(false);
+        }
+        else{
+            lRay.SetActive(true);
+            rRay.SetActive(true);
+        }
     }
 }

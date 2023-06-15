@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BreakableObjectsFactory : MonoBehaviour
 {
-    [SerializeField] List<GameObject> Objects;
+    [SerializeField] public List<GameObject> Objects;
     // Start is called before the first frame update
     void Start()
     {
