@@ -13,25 +13,40 @@ public class GameManager : MonoBehaviour
     public Transform monsterSpawnPoint;
     public MonsterStateMachine monsterStateMachine;
 
-    // Scores
+    // Variables
+    [SerializeField] private float timeBetweenForestSounds;
     private float highScore = 0;
     private float currentScore = 0;
 
     // Events
     public static UnityEvent<float> currentScoreUpdated = new UnityEvent<float>();
 
+    public List<String> forestSoundTags = new List<String>();
+    private List<String> tempForestSoundTags = new List<String>();
+
     private void Awake() {
         highScore = PlayerPrefs.GetFloat("highScore");
+        StartCoroutine(PlayForestSounds());
     }
 
-    public void StartGame() {
+    private void Start() {
+        // Play menu music
+        AudioManager.instance.Play("crickets");
+    }
+
+    public void RestartGame() {
         // Reset player to start point
-        // call reset player function on player script
+        // Call reset player function on player script
         currentScore = 0;
         monsterStateMachine.changeState(monsterStateMachine.monsterIdleState);
         monsterStateMachine.transform.position = monsterSpawnPoint.transform.position;
     }
 
+    public void StartGame() {
+        // Allow player movement
+        // start playing some sounds maybe
+        // Play gameplay music
+    }
     public void PauseGame() {
         Time.timeScale = 0;
     }
@@ -59,5 +74,19 @@ public class GameManager : MonoBehaviour
 
     public void OnDestroy() {
         SaveData();
+    }
+
+    private IEnumerator PlayForestSounds() {
+        while (true) {
+            if (tempForestSoundTags.Count == 0) {
+                tempForestSoundTags = new List<string>(forestSoundTags);
+            }
+            int indexToUse = UnityEngine.Random.Range(0, tempForestSoundTags.Count);
+            string tagToPlay = tempForestSoundTags[indexToUse];
+            tempForestSoundTags[indexToUse] = tempForestSoundTags[tempForestSoundTags.Count - 1];
+            tempForestSoundTags.RemoveAt(tempForestSoundTags.Count - 1);
+            AudioManager.instance.Play(tagToPlay);
+            yield return new WaitForSeconds(timeBetweenForestSounds);
+        }
     }
 }

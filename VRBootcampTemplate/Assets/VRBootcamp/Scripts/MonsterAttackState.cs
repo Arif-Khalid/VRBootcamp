@@ -6,7 +6,6 @@ public class MonsterAttackState : MonsterState
 {
     private float currentTime;
     public override void OnEnterState() {
-        monsterStateMachine.monsterSoundManager.EndSounds();
         currentTime = 0;
     }
 
