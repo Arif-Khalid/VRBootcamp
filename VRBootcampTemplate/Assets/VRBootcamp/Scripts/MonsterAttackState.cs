@@ -16,7 +16,9 @@ public class MonsterAttackState : MonsterState
         Vector3 dir = monsterStateMachine.target.position - monsterStateMachine.transform.position;
         monsterStateMachine.transform.forward = Vector3.Lerp(monsterStateMachine.transform.forward, new Vector3(dir.x, 0, dir.z), Time.deltaTime * monsterStateMachine.rotateSpeed);
         if (currentTime >= monsterStateMachine.timeBetweenAttacks) {
-            if (Vector3.Distance(monsterStateMachine.transform.position, monsterStateMachine.target.position) > monsterStateMachine.distanceToAttack) {
+            Vector3 monsterStateMachineXZVector3 = new Vector3(monsterStateMachine.transform.position.x, 0, monsterStateMachine.transform.position.z);
+            Vector3 targetXZVector3 = new Vector3(monsterStateMachine.target.transform.position.x, 0, monsterStateMachine.target.transform.position.z);
+            if (Vector3.Distance(monsterStateMachineXZVector3, targetXZVector3) > monsterStateMachine.distanceToAttack) {
                 // Change State
                 monsterStateMachine.changeState(monsterStateMachine.monsterChaseState);
             }

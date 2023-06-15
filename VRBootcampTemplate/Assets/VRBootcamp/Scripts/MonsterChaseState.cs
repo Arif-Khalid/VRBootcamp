@@ -18,7 +18,9 @@ public class MonsterChaseState : MonsterState
 
     public override void Update() {
         if (currentTime >= monsterStateMachine.timeBetweenDestinationUpdate) {
-            if (Vector3.Distance(monsterStateMachine.transform.position, monsterStateMachine.target.position) <= monsterStateMachine.distanceToAttack) {
+            Vector3 monsterStateMachineXZVector3 = new Vector3(monsterStateMachine.transform.position.x, 0, monsterStateMachine.transform.position.z);
+            Vector3 targetXZVector3 = new Vector3(monsterStateMachine.target.transform.position.x, 0, monsterStateMachine.target.transform.position.z);
+            if (Vector3.Distance(monsterStateMachineXZVector3, targetXZVector3) <= monsterStateMachine.distanceToAttack) {
                 monsterStateMachine.changeState(monsterStateMachine.monsterAttackState);
             }
             else {
