@@ -42,6 +42,10 @@ public class MonsterStateMachine : MonoBehaviour
         changeState(monsterChaseState);
     }
 
+    public void reset() {
+        changeState(monsterIdleState);
+    }
+
     public void startAttacking() {
         attackCollider.enabled = true;
     }
