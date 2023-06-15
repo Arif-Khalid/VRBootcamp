@@ -41,6 +41,7 @@ public class PlayerController : MonoBehaviour
     private float score = 0f;
     public InputActionReference rayButton;
     public float speed;
+    private float tempSpeed;
     // Start is called before the first frame update
 
 
@@ -234,8 +235,13 @@ public class PlayerController : MonoBehaviour
             weap.transform.eulerAngles = new Vector3(90f, 180f, 0);
         }
 
-        if (isSlashingL) Slash(true);
-        if (isSlashingR) Slash(false);
+        if (isSlashingL) {
+            Slash(true);
+        }
+
+        if (isSlashingR) {
+            Slash(false);
+        }
     }
 
     public void Slash(bool slashLeft) {
@@ -244,8 +250,12 @@ public class PlayerController : MonoBehaviour
             BreakableObj breakableObj = collider.GetComponent<BreakableObj>();
             if (breakableObj != null) {
                 breakableObj.Break();
-                if(slashLeft) PXR_Input.SendHapticImpulse(PXR_Input.VibrateType.LeftController, .5f, 500, 100);
-                else PXR_Input.SendHapticImpulse(PXR_Input.VibrateType.RightController, .5f, 500, 100);
+                if (slashLeft) {
+                    PXR_Input.SendHapticImpulse(PXR_Input.VibrateType.LeftController, .5f, 500, 100);
+                }
+                else {
+                    PXR_Input.SendHapticImpulse(PXR_Input.VibrateType.RightController, .5f, 500, 100);
+                }
             }
         }
     }
@@ -316,5 +326,18 @@ public class PlayerController : MonoBehaviour
             lRay.SetActive(true);
             rRay.SetActive(true);
         }
+    }
+
+    public void StopMovement() {
+        if (speed == 0) {
+            return;
+        }
+
+        tempSpeed = speed;
+        speed = 0;
+    }
+
+    public void ResumeMovement() {
+        speed = tempSpeed;
     }
 }

@@ -24,6 +24,7 @@ public class GameManager : MonoBehaviour
     public Canvas deathMenu;
     public AudioListener playerAudioListener;
     public Slider audioSlider;
+    public ScoreCalculator scoreCalculator;
 
     // Variables
     [SerializeField] private float timeBetweenForestSounds;
@@ -45,6 +46,7 @@ public class GameManager : MonoBehaviour
         // Play menu music
         pauseButtonInputActionReference.action.started += PauseGame;
         AudioManager.instance.Play("crickets");
+        playerController.StopMovement();
     }
 
     public void RestartGame() {
@@ -58,15 +60,18 @@ public class GameManager : MonoBehaviour
         startMenu.enabled = true;
         playerTransform.position = playerSpawnPoint.position;
         playerController.Reset();
-
+        playerController.StopMovement();
+        scoreCalculator.ResetCalculation();
     }
 
     public void StartGame() {
         // Allow player movement
         // start playing some sounds maybe
         // Play gameplay music
+        scoreCalculator.StartCoroutine(scoreCalculator.UpdateScore());
         startMenu.enabled = false;
         monsterStateMachine.startChase();
+        playerController.ResumeMovement();
     }
     public void PauseGame(InputAction.CallbackContext a) {
         if (deathMenu.enabled) {
@@ -80,6 +85,7 @@ public class GameManager : MonoBehaviour
         Debug.Log("I have paused the game");
         pauseMenu.enabled = true;
         Time.timeScale = 0;
+
     }
 
     public void EnableSettingsMenu() {
@@ -105,8 +111,13 @@ public class GameManager : MonoBehaviour
         Debug.Log("I have resumed the game");
     }
     public void PlayerDie() {
+        Debug.Log("Player has died");
+        scoreCalculator.StopAllCoroutines();
         deathMenu.enabled = true;
+        playerController.StopMovement();
     }
+
+
     public void EndGame() {
         SaveData();
         Application.Quit();
