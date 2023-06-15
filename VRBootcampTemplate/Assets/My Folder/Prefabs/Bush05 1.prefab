@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5602421788576826112}
   - component: {fileID: 5602421788596836256}
-  - component: {fileID: 5828744022659240791}
   m_Layer: 0
   m_Name: Bush05 1
   m_TagString: Untagged
@@ -68,20 +67,6 @@ LODGroup:
     renderers:
     - renderer: {fileID: 5602421788578595302}
   m_Enabled: 1
---- !u!114 &5828744022659240791
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5602421788576341792}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 79f20506c083bb548a7f74f2157a0b1b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Player: {fileID: 0}
-  BFO: {fileID: 0}
 --- !u!1 &5602421788576341794
 GameObject:
   m_ObjectHideFlags: 0
@@ -93,7 +78,8 @@ GameObject:
   - component: {fileID: 5602421788576826114}
   - component: {fileID: 5602421788579693344}
   - component: {fileID: 5602421788578595296}
-  - component: {fileID: 1424655337012841978}
+  - component: {fileID: 2396943031575512081}
+  - component: {fileID: 2484821234564317424}
   m_Layer: 0
   m_Name: Bush05_LOD0
   m_TagString: Untagged
@@ -166,7 +152,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &1424655337012841978
+--- !u!65 &2396943031575512081
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -177,8 +163,22 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.45522186, y: 0.43174168, z: 0.36247703}
-  m_Center: {x: 0.007838374, y: 0.24149117, z: -0.011832738}
+  m_Size: {x: 0.58863413, y: 0.49473733, z: 0.6084042}
+  m_Center: {x: -0.003983229, y: 0.23171106, z: -0.0059116925}
+--- !u!114 &2484821234564317424
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5602421788576341794}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79f20506c083bb548a7f74f2157a0b1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Player: {fileID: 0}
+  BFO: {fileID: 0}
 --- !u!1 &5602421788576341796
 GameObject:
   m_ObjectHideFlags: 0

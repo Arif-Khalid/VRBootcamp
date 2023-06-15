@@ -19,7 +19,7 @@ public class BreakableObj : MonoBehaviour
     {
         
     }
-    public void OnTriggerEnter(Collider col){
+/*    public void OnTriggerStay(Collider col){
         Debug.Log(Player.isSlashingL);
         if (col.gameObject.tag == "Weapon" && (Player.isSlashingL || Player.isSlashingR )){
             if (Player.isSlashingL){
@@ -31,5 +31,9 @@ public class BreakableObj : MonoBehaviour
             gameObject.SetActive(false);
             Debug.Log("removed"); 
         }
+    }*/
+
+    public void Break() {
+        gameObject.SetActive(false);
     }
 }

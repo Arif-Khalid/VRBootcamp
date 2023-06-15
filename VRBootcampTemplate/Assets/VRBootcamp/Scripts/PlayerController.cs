@@ -18,6 +18,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private GameObject lRay;
     [SerializeField] private GameObject rRay;
     [SerializeField] private GameObject weap;
+    [SerializeField] private BoxCollider weaponHitBox;
     private GameObject lWeap;
     private GameObject rWeap;
     private CharacterController XROriginCC;
@@ -27,6 +28,7 @@ public class PlayerController : MonoBehaviour
     private bool isRunning = false;
     private float timetoStop = 0.5f;
 
+    public float weaponHitRange = 1f;
     public bool isSlashingL = false;
     private bool lPickUp = false;
     [SerializeField] public float timeSlashL = 0.5f;
@@ -50,6 +52,9 @@ public class PlayerController : MonoBehaviour
     private float maxHeightR;
     private float prevHeightR;
     private float heightTimeR;
+
+    private float currentPosition;
+    private float previousPosition;
 
     private void Awake() {
         rayButton.action.started += rayDebug;
@@ -227,6 +232,21 @@ public class PlayerController : MonoBehaviour
         if (lWeap != weap && rWeap != weap) {
             weap.transform.position = Camera.main.transform.position - new Vector3(0.1f, 0.5f, 0);
             weap.transform.eulerAngles = new Vector3(90f, 180f, 0);
+        }
+
+        if (isSlashingL) Slash(true);
+        if (isSlashingR) Slash(false);
+    }
+
+    public void Slash(bool slashLeft) {
+        var colliders = Physics.OverlapSphere(weaponHitBox.transform.position, weaponHitRange);
+        foreach (var collider in colliders) {
+            BreakableObj breakableObj = collider.GetComponent<BreakableObj>();
+            if (breakableObj != null) {
+                breakableObj.Break();
+                if(slashLeft) PXR_Input.SendHapticImpulse(PXR_Input.VibrateType.LeftController, .5f, 500, 100);
+                else PXR_Input.SendHapticImpulse(PXR_Input.VibrateType.RightController, .5f, 500, 100);
+            }
         }
     }
     public void PickUpWeap(SelectEnterEventArgs ObjSelector) {
