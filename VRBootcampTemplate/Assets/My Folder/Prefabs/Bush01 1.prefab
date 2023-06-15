@@ -79,6 +79,7 @@ GameObject:
   - component: {fileID: 52484451474454160}
   - component: {fileID: 52484451473355856}
   - component: {fileID: 168059655727452166}
+  - component: {fileID: 237536145742977208}
   m_Layer: 0
   m_Name: Bush01_LOD0
   m_TagString: Untagged
@@ -164,6 +165,20 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.4441403, y: 0.79588145, z: 0.5234396}
   m_Center: {x: -0.05747593, y: 0.40373275, z: -0.052016567}
+--- !u!114 &237536145742977208
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 52484451475548818}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79f20506c083bb548a7f74f2157a0b1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Player: {fileID: 0}
+  BFO: {fileID: 0}
 --- !u!1 &52484451475548820
 GameObject:
   m_ObjectHideFlags: 0

@@ -826,15 +826,6 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Move",
-                    "type": "Value",
-                    "id": "9693e25f-8a4f-4aed-842f-3961243c69a1",
-                    "expectedControlType": "Vector2",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": true
-                },
-                {
                     "name": "Grab Move",
                     "type": "Button",
                     "id": "c5a6d766-d487-42ae-b293-da4749469e18",
@@ -895,17 +886,6 @@
                     "processors": "",
                     "groups": "Noncontinuous Move",
                     "action": "Turn",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "8e383b1a-270f-4c20-819b-89a59cffb498",
-                    "path": "<XRController>{LeftHand}/Primary2DAxis",
-                    "interactions": "",
-                    "processors": "StickDeadzone",
-                    "groups": "Continuous Move",
-                    "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -2106,13 +2086,40 @@
             ]
         },
         {
-            "name": "Vr Bootcamp",
-            "id": "72df24b7-6e9a-44b1-9bf4-c215865f94be",
+            "name": "VR Bootcamp",
+            "id": "d295de2a-6773-4206-b9d6-efef4275a701",
             "actions": [
                 {
-                    "name": "Pause",
+                    "name": "New action",
                     "type": "Button",
-                    "id": "227910ca-9114-49e5-b24a-5e3349b20e2e",
+                    "id": "4ca68ea1-cc83-4446-b406-13f8b7d799b2",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "flashlightButton",
+                    "type": "Button",
+                    "id": "2933ddf3-3295-4b87-8d07-7d3674f71d6a",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "PauseButton",
+                    "type": "Button",
+                    "id": "5caec9b8-96ef-4c28-8acf-9cd57bb53c0d",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "RayButton",
+                    "type": "Button",
+                    "id": "a7736470-3bd9-46c8-b590-443fe79af98d",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -2122,12 +2129,56 @@
             "bindings": [
                 {
                     "name": "",
-                    "id": "92e9ca3b-e279-4d45-aaba-e58c118d39f2",
+                    "id": "549e4c2a-51e0-45d4-beb0-b7758bf4a1d0",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "New action",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "0d532ccf-4674-4e4f-85e0-bc966e44ad3f",
+                    "path": "<XRController>{RightHand}/primaryButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "flashlightButton",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4285dbf0-ebd1-4bd3-b8a7-511bbced71d5",
                     "path": "<XRController>{LeftHand}/primaryButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Pause",
+                    "action": "flashlightButton",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "0ffa9e72-8982-41e7-9f8c-0bffc119860d",
+                    "path": "<XRController>{LeftHand}/secondaryButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "PauseButton",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "42787fd1-483c-42de-9fb8-018281f16203",
+                    "path": "<XRController>{RightHand}/secondaryButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RayButton",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
