@@ -2128,7 +2128,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "ResetButton",
+                    "name": "PauseButton",
                     "type": "Button",
                     "id": "5caec9b8-96ef-4c28-8acf-9cd57bb53c0d",
                     "expectedControlType": "Button",
@@ -2187,7 +2187,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "ResetButton",
+                    "action": "PauseButton",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
     public Transform playerSpawnPoint;
     public Transform monsterSpawnPoint;
     public MonsterStateMachine monsterStateMachine;
+    public PlayerController playerController;
 
 
     public Canvas startMenu;
@@ -56,6 +57,8 @@ public class GameManager : MonoBehaviour
         monsterStateMachine.transform.position = monsterSpawnPoint.transform.position;
         startMenu.enabled = true;
         playerTransform.position = playerSpawnPoint.position;
+        playerController.Reset();
+
     }
 
     public void StartGame() {
