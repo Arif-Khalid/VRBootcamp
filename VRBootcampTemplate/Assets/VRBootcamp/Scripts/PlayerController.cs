@@ -11,8 +11,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] GameObject lHand;
     [SerializeField] GameObject rHand;
     [SerializeField] GameObject flashlight;
-    [SerializeField] GameObject lRay;
-    [SerializeField] GameObject rRay;
+    [SerializeField] GameObject lDirect;
+    [SerializeField] GameObject rDirect;
     [SerializeField] BreakableObjectsFactory BOF;
     [SerializeField] GameObject machete;
     GameObject lWeap;
@@ -163,36 +163,38 @@ public class PlayerController : MonoBehaviour
         else if (isSlashingR){
             Debug.Log("slashing right");
         }
-        if (lWeap){
+        Debug.Log(lWeap);
+        if (lWeap != null){
             Lcont.hideControllerModel = true;
             lWeap.transform.position = lHand.transform.position;
         }
-        if (rWeap){
+        if (rWeap != null){
             rWeap.transform.position = rHand.transform.position;
             Rcont.hideControllerModel = true;
         }
         //XROrigin.transform.position = transform.position;
     }
     public void PickUpWeap(SelectEnterEventArgs ObjSelector){
-           if (ObjSelector.interactorObject.transform.gameObject == lRay){
+        Debug.Log(ObjSelector.interactorObject.transform.gameObject);
+        if (ObjSelector.interactorObject.transform.gameObject == lDirect){
             lPickUp = true;
             lWeap = ObjSelector.interactableObject.transform.gameObject;
             Lcont.hideControllerModel = true;
-            }
-           else if (ObjSelector.interactorObject.transform.gameObject == rRay){
+        }
+        else if (ObjSelector.interactorObject.transform.gameObject == rDirect){
             rPickUp = true;
             rWeap = ObjSelector.interactableObject.transform.gameObject;
             Rcont.hideControllerModel = true;
         }
     }
     public void LetGoWeap(SelectExitEventArgs ObjSelector){
-            if (ObjSelector.interactorObject.transform.gameObject == lRay){
+            if (ObjSelector.interactorObject.transform.gameObject == lDirect){
             lPickUp = false;
             isSlashingL = false;
             lWeap = null;
             Lcont.hideControllerModel = false;
         }
-           else if (ObjSelector.interactorObject.transform.gameObject == lRay){
+           else if (ObjSelector.interactorObject.transform.gameObject == rDirect){
             rPickUp = false;
             isSlashingR = false;   
             rWeap = null;
