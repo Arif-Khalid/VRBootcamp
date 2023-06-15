@@ -136,7 +136,7 @@ public class PlayerController : MonoBehaviour
         flashlight.transform.position = Camera.main.transform.position + new Vector3(0, 0.15f, 0);
         flashlight.transform.LookAt(flashlight.transform.position + Camera.main.transform.forward);
         if (isRunning) {
-            XROriginCC.Move(new Vector3((Camera.main.transform.forward.normalized * Time.deltaTime * speed).x, 0, (Camera.main.transform.forward.normalized * Time.deltaTime * speed).z));
+            XROriginCC.Move(new Vector3((Camera.main.transform.forward.normalized * Time.deltaTime * speed).x, -4.9f, (Camera.main.transform.forward.normalized * Time.deltaTime * speed).z));
             //Controller Type, Vibration amp(0-1), Frequency 50-500HZ, duration in ms
             //PXR_Input.SendHapticImpulse(PXR_Input.VibrateType.LeftController, .5f, 10,100);
             //PXR_Input.SendHapticImpulse(PXR_Input.VibrateType.RightController, .5f, 10,100);
@@ -274,7 +274,7 @@ public class PlayerController : MonoBehaviour
         rightArmUp = 0;
         weap.transform.position = Camera.main.transform.position - new Vector3(0.1f, 0.5f, 0);
         weap.transform.eulerAngles = new Vector3(90f, 180f, 0);
-        //BOF.Reset();
+        BOF.Reset();
         Debug.Log(score);
         score = 0f;
     }

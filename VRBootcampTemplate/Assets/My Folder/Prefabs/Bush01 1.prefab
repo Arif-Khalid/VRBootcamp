@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 52484451475257008}
   - component: {fileID: 52484451490800144}
+  - component: {fileID: 4629259029013762826}
   m_Layer: 0
   m_Name: Bush01 1
   m_TagString: Untagged
@@ -67,6 +68,20 @@ LODGroup:
     renderers:
     - renderer: {fileID: 52484451473355862}
   m_Enabled: 1
+--- !u!114 &4629259029013762826
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 52484451475548816}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79f20506c083bb548a7f74f2157a0b1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Player: {fileID: 0}
+  BFO: {fileID: 0}
 --- !u!1 &52484451475548818
 GameObject:
   m_ObjectHideFlags: 0
