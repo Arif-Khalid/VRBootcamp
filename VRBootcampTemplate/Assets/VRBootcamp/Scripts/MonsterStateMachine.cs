@@ -10,6 +10,7 @@ public class MonsterStateMachine : MonoBehaviour
     public Animator animator;
     public float timeBetweenAttacks;
     public float timeBetweenDestinationUpdate;
+    public float distanceForSpeedUp;
     public float rotateSpeed;
     public BoxCollider attackCollider;
     public MonsterSoundManager monsterSoundManager;

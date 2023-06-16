@@ -23,7 +23,7 @@ public class AudioManager : MonoBehaviour
             s.source.volume = s.volume;
             s.source.pitch = s.pitch;
             s.source.loop = s.loop;
-            s.source.reverbZoneMix = 0.2f;
+            s.source.spatialBlend = 0.2f;
             soundDict.Add(s.name, s.source);
         }
     }

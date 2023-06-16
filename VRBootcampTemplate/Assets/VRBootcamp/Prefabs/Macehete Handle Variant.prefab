@@ -157,6 +157,11 @@ PrefabInstance:
       propertyPath: m_UseGravity
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4257412417454173061, guid: d5615d616019430d9c2e8727e71c97fb,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 1a5c5ce3faff64a44bdd1edf0b370ada, type: 2}
     - target: {fileID: 4257412417454173062, guid: d5615d616019430d9c2e8727e71c97fb,
         type: 3}
       propertyPath: m_Mesh
@@ -166,7 +171,7 @@ PrefabInstance:
     - target: {fileID: 4257412417454173071, guid: d5615d616019430d9c2e8727e71c97fb,
         type: 3}
       propertyPath: m_Name
-      value: Macehete Handle
+      value: Macehete Handle Variant
       objectReference: {fileID: 0}
     - target: {fileID: 4257412417454173071, guid: d5615d616019430d9c2e8727e71c97fb,
         type: 3}
